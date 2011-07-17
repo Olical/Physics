@@ -57,6 +57,31 @@ var Physics = {
 		}
 	}),
 	Particle: new Class({
-		
+		Implements: [Events, Options],
+		options: {
+			position: {
+				x: 0,
+				y: 0
+			},
+			force: {
+				x: 0,
+				y: 0
+			}
+		},
+		initialize: function(options) {
+			// Set the options
+			this.setOptions(options);
+			
+			// Set up the properties
+			this.position = {
+				x: options.position.x,
+				y: options.position.y
+			};
+			
+			this.force = {
+				x: options.force.x,
+				y: options.force.y
+			};
+		}
 	})
 };

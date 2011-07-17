@@ -42,6 +42,9 @@ var Physics = {
 		addParticle: function(particle) {
 			// Add the particle to the particles array
 			this.particles.push(particle);
+			
+			// Add it into the positions index
+			this.positions[particle.position.x][particle.position.y] = particle;
 		},
 		removeParticle: function(paticle) {
 			// Get the index of the paticle in the particles array

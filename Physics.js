@@ -35,7 +35,7 @@ var Physics = {
 		},
 		step: function() {
 			// Loop over the particles
-			this.particles.each(function(particle)) {
+			this.particles.each(function(particle) {
 				
 			});
 		},
@@ -56,4 +56,4 @@ var Physics = {
 	Particle: new Class({
 		
 	})
-}
+};

@@ -12,17 +12,32 @@ var Physics = {
 			height: 500
 		},
 		initialize: function(options) {
+			// Initialise variables
+			var x = null,
+				y = null;
+			
 			// Set the options
 			this.setOptions(options);
 			
-			// Set up the particle array
+			// Set up the storage arrays
 			this.particles = [];
+			this.positions = [];
+			
+			for(x = 0; x < options.width; x += 1) {
+				for(y = 0; y < options.height; y += 1) {
+					this.positions[x] = [];
+					this.positions[x][y] = false;
+				}
+			}
 			
 			// Start the loop
 			setInterval(this.step, 1000 / fps);
 		},
 		step: function() {
-			
+			// Loop over the particles
+			this.particles.each(function(particle)) {
+				
+			});
 		},
 		addParticle: function(particle) {
 			// Add the particle to the particles array

@@ -24,11 +24,18 @@ var Physics = {
 		step: function() {
 			
 		},
-		addParticle: function() {
-			
+		addParticle: function(particle) {
+			// Add the particle to the particles array
+			this.particles.push(particle);
 		},
-		removeParticle: function() {
+		removeParticle: function(paticle) {
+			// Get the index of the paticle in the particles array
+			var index = this.particles.indexOf(particle);
 			
+			// If it is not -1 then splice it out
+			if(index !== -1) {
+				this.particles.splice(index, 1);
+			}
 		}
 	}),
 	Particle: new Class({

@@ -35,11 +35,21 @@ var Physics = {
 		start: function() {
 			if(this.interval === false) {
 				this.interval = setInterval(this.step, 1000 / this.options.fps);
+				
+				// Fire the start event
+				this.fireEvent('start');
+			}
+			else {
+				// Fire the alreadyRunning event
+				this.fireEvent('alreadyRunning');
 			}
 		},
 		stop: function() {
 			clearInterval(this.interval);
 			this.interval = false;
+			
+			// Fire the stop event
+			this.fireEvent('stop');
 		},
 		step: function() {
 			// Loop over the particles
@@ -56,6 +66,9 @@ var Physics = {
 			
 			// Add it into the positions index
 			this.positions[particle.options.position.x][particle.options.position.y] = particle;
+			
+			// Fire the addParticle event
+			this.fireEvent('addParticle');
 		},
 		removeParticle: function(paticle) {
 			// Get the index of the paticle in the particles array
@@ -64,6 +77,13 @@ var Physics = {
 			// If it is not -1 then splice it out
 			if(index !== -1) {
 				this.particles.splice(index, 1);
+				
+				// Fire the removeParticle event
+				this.fireEvent('addParticle');
+			}
+			else {
+				// Fire the noParticle event
+				this.fireEvent('noParticle');
 			}
 		}
 	}),

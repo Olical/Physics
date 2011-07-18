@@ -70,6 +70,10 @@ var Physics = {
 		initialize: function(options) {
 			// Set the options
 			this.setOptions(options);
+		},
+		toJSON: function() {
+			// Return the current options as a JSON string
+			return JSON.strigify(this.options);
 		}
 	})
 };

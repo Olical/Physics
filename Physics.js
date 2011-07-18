@@ -13,6 +13,7 @@ var Physics = {
 		},
 		particles: [],
 		positions: [],
+		interval: false,
 		initialize: function(options) {
 			// Initialise variables
 			var x = null,
@@ -29,7 +30,16 @@ var Physics = {
 			}
 			
 			// Start the loop
-			setInterval(this.step, 1000 / fps);
+			this.start();
+		},
+		start: function() {
+			if(this.interval === false) {
+				this.interval = setInterval(this.step, 1000 / this.options.fps);
+			}
+		},
+		stop: function() {
+			clearInterval(this.interval);
+			this.interval = false;
 		},
 		step: function() {
 			// Loop over the particles

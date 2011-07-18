@@ -54,12 +54,31 @@ var Physics = {
 		step: function() {
 			// Loop over the particles
 			this.particles.each(function(particle) {
+				// Initialise variables
+				var moved = {},
+					toAdd = {};
+				
 				// Apply weight to velocity on the y axis
 				particle.options.velocity.y += particle.options.weight;
 				
-				// Apply velocity to position
-				particle.options.position.x += particle.options.velocity.x;
-				particle.options.position.y += particle.options.velocity.y;
+				// Get the new values
+				moved.x = Math.floor(particle.options.position.x + particle.options.velocity.x);
+				moved.y = Math.floor(particle.options.position.y + particle.options.velocity.y);
+				
+				// Work out what we need to add each time
+				if(modex.x > particle.options.position.x) {
+					toAdd.x = 1;
+				}
+				else {
+					toAdd.x = -1;
+				}
+				
+				if(modex.y > particle.options.position.y) {
+					toAdd.y = 1;
+				}
+				else {
+					toAdd.y = -1;
+				}
 			});
 		},
 		addParticle: function(particle) {

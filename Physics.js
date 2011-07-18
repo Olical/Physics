@@ -56,9 +56,6 @@ var Physics = {
 			this.particles.each(function(particle) {
 				
 			});
-			
-			// Fire the step event
-			this.fireEvent('step');
 		},
 		addParticle: function(particle) {
 			// Add the particle to the particles array

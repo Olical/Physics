@@ -55,7 +55,7 @@ var Physics = {
 		}
 	}),
 	Particle: new Class({
-		Implements: [Events, Options],
+		Implements: [Options],
 		options: {
 			position: {
 				x: 0,

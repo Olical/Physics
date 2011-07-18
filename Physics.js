@@ -11,6 +11,8 @@ var Physics = {
 			width: 500,
 			height: 500
 		},
+		particles: [],
+		positions: [],
 		initialize: function(options) {
 			// Initialise variables
 			var x = null,
@@ -18,10 +20,6 @@ var Physics = {
 			
 			// Set the options
 			this.setOptions(options);
-			
-			// Set up the storage arrays
-			this.particles = [];
-			this.positions = [];
 			
 			for(x = 0; x < options.width; x += 1) {
 				for(y = 0; y < options.height; y += 1) {
@@ -44,7 +42,7 @@ var Physics = {
 			this.particles.push(particle);
 			
 			// Add it into the positions index
-			this.positions[particle.position.x][particle.position.y] = particle;
+			this.positions[particle.options.position.x][particle.options.position.y] = particle;
 		},
 		removeParticle: function(paticle) {
 			// Get the index of the paticle in the particles array
@@ -63,25 +61,15 @@ var Physics = {
 				x: 0,
 				y: 0
 			},
-			force: {
+			velocity: {
 				x: 0,
 				y: 0
-			}
+			},
+			weight: 4
 		},
 		initialize: function(options) {
 			// Set the options
 			this.setOptions(options);
-			
-			// Set up the properties
-			this.position = {
-				x: options.position.x,
-				y: options.position.y
-			};
-			
-			this.force = {
-				x: options.force.x,
-				y: options.force.y
-			};
 		}
 	})
 };

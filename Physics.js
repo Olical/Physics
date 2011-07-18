@@ -54,7 +54,12 @@ var Physics = {
 		step: function() {
 			// Loop over the particles
 			this.particles.each(function(particle) {
+				// Apply weight to velocity on the y axis
+				particle.options.velocity.y += particle.options.weight;
 				
+				// Apply velocity to position
+				particle.options.position.x += particle.options.velocity.x;
+				particle.options.position.y += particle.options.velocity.y;
 			});
 		},
 		addParticle: function(particle) {

@@ -58,6 +58,20 @@ var Physics = {
 				var moved = {},
 					toAdd = {};
 				
+				/**
+				 * Calculates the x and y for the toAdd object
+				 * 
+				 * @param {String} axis The axis to calculate
+				 */
+				function calculateToAdd(axis) {
+					if(moved[axis] > particle.options.position[axis]) {
+						toAdd[axis] = 1;
+					}
+					else {
+						toAdd[axis] = -1;
+					}
+				}
+				
 				// Apply weight to velocity on the y axis
 				particle.options.velocity.y += particle.options.weight;
 				
@@ -65,20 +79,9 @@ var Physics = {
 				moved.x = Math.floor(particle.options.position.x + particle.options.velocity.x);
 				moved.y = Math.floor(particle.options.position.y + particle.options.velocity.y);
 				
-				// Work out what we need to add each time
-				if(modex.x > particle.options.position.x) {
-					toAdd.x = 1;
-				}
-				else {
-					toAdd.x = -1;
-				}
-				
-				if(modex.y > particle.options.position.y) {
-					toAdd.y = 1;
-				}
-				else {
-					toAdd.y = -1;
-				}
+				// Calculate toAdd
+				calculateToAdd('x');
+				calculateToAdd('y');
 			});
 		},
 		addParticle: function(particle) {

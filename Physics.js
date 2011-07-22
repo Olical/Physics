@@ -55,33 +55,22 @@ var Physics = {
 			// Loop over the particles
 			this.particles.each(function(particle) {
 				// Initialise variables
-				var moved = {},
-					toAdd = {};
-				
-				/**
-				 * Calculates the x and y for the toAdd object
-				 * 
-				 * @param {String} axis The axis to calculate
-				 */
-				function calculateToAdd(axis) {
-					if(moved[axis] > particle.options.position[axis]) {
-						toAdd[axis] = 1;
-					}
-					else {
-						toAdd[axis] = -1;
-					}
-				}
+				var movement = null;
 				
 				// Apply weight to velocity on the y axis
 				particle.options.velocity.y += particle.options.weight;
 				
-				// Get the new values
-				moved.x = Math.floor(particle.options.position.x + particle.options.velocity.x);
-				moved.y = Math.floor(particle.options.position.y + particle.options.velocity.y);
-				
-				// Calculate toAdd
-				calculateToAdd('x');
-				calculateToAdd('y');
+				// Work out from and to
+				movement = {
+					from: {
+						x: particle.options.position.x,
+						y: particle.options.position.y
+					},
+					to: {
+						x: Math.floor(particle.options.position.x + particle.options.velocity.x),
+						y: Math.floor(particle.options.position.y + particle.options.velocity.y)
+					}
+				};
 			});
 		},
 		addParticle: function(particle) {

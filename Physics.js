@@ -87,7 +87,8 @@ var Physics = {
 					difference = {
 						x: to.x - from.x,
 						y: to.y - from.y
-					};
+					},
+					steps = (difference.x >= difference.y) ? difference.x : difference.y;
 			}.bind(this);
 			
 			this.step = function() {

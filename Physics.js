@@ -41,7 +41,7 @@ var Physics = {
 					// Fire the alreadyRunning event
 					this.fireEvent('alreadyRunning');
 				}
-			};
+			}.bind(this);
 			
 			this.stop = function() {
 				clearInterval(this.interval);
@@ -49,7 +49,7 @@ var Physics = {
 				
 				// Fire the stop event
 				this.fireEvent('stop');
-			};
+			}.bind(this);
 			
 			this.step = function() {
 				// Loop over the particles
@@ -152,7 +152,7 @@ var Physics = {
 				
 				// Fire the addParticle event
 				this.fireEvent('addParticle');
-			};
+			}.bind(this);
 			
 			this.removeParticle = function(paticle) {
 				// Get the index of the paticle in the particles array
@@ -169,7 +169,7 @@ var Physics = {
 					// Fire the noParticle event
 					this.fireEvent('noParticle');
 				}
-			};
+			}.bind(this);
 			
 			// Start the loop
 			this.start();

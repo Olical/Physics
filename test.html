@@ -12,7 +12,7 @@
 		<script type='text/javascript' src='Physics.js'></script>
 		<script type='text/javascript'>
 			var display = $('world').getContext('2d'),
-				world = new Physics.World({});
+				world = new Physics.World();
 				
 				world.addEvent('step', function() {
 					// Every tick clear the screen

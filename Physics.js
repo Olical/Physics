@@ -93,12 +93,14 @@ var Physics = {
 						x: difference.x / steps,
 						y: difference.y / steps
 					},
-					current = from,
+					current = {},
 					i = null;
 				
 				// Loop over steps
 				for(i = 0; i < steps; i += 1) {
-					
+					// Calculate current
+					current.x = Math.floor(from.x + (increment.x * i));
+					current.y = Math.floor(from.y + (increment.y * i));
 				}
 			}.bind(this);
 			

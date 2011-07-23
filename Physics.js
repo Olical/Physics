@@ -9,8 +9,7 @@ var Physics = {
 		options: {
 			fps: 16,
 			width: 500,
-			height: 500,
-			size: 1
+			height: 500
 		},
 		initialize: function(options) {
 			// Initialise variables
@@ -59,6 +58,10 @@ var Physics = {
 			}.bind(this);
 			
 			this.moveParticle = function(particle, to) {
+				// Make sure to is within the bounds
+				to.x = to.x.limit(0, this.options.width - 1);
+				to.y = to.y.limit(0, this.options.height - 1);
+				
 				// Change the positions object value
 				this.positions[particle.options.position.x][particle.options.position.y] = false;
 				this.positions[to.x][to.y] = particle;
@@ -105,7 +108,7 @@ var Physics = {
 					current.y = Math.floor(from.y + (increment.y * i));
 					
 					// Check if the point is within the bounds
-					if(current.x < 0 || current.y < 0 || current.x + this.options.size >= this.options.width || current.y + this.options.size >= this.options.height) {
+					if(current.x < 0 || current.y < 0 || current.x >= this.options.width || current.y >= this.options.height) {
 						// We need to stop, set the new location
 						this.moveParticle(particle, previous);
 						this.fireEvent('wallCollision', [particle]);

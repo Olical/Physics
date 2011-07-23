@@ -67,7 +67,19 @@ var Physics = {
 				particle.options.position = to;
 				
 				return this;
-			};
+			}.bind(this);
+			
+			this.applyFriction = function(particle, axis) {
+				// Apply friction
+				if(particle.options.velocity[axis] > 0 || particle.options.velocity[axis] < 0) {
+					particle.options.velocity[axis] -= particle.options.velocity[axis] / particle.options.friction;
+				}
+				
+				// If velocity is tiny, remove it
+				if(particle.options.velocity[axis] > -0.01 && particle.options.velocity[axis] < 0.01) {
+					particle.options.velocity[axis] = 0;
+				}
+			}.bind(this);
 			
 			this.step = function() {
 				// Loop over the particles
@@ -76,8 +88,8 @@ var Physics = {
 					particle.options.velocity.y += particle.options.weight;
 					
 					// Apply friction
-					particle.options.velocity.x -= particle.options.velocity.x / (particle.options.weight / 2);
-					particle.options.velocity.y -= particle.options.velocity.y / particle.options.weight;
+					this.applyFriction(particle, 'x');
+					this.applyFriction(particle, 'y');
 				}.bind(this));
 				
 				// Fire the step event
@@ -133,7 +145,8 @@ var Physics = {
 				x: 0,
 				y: 0
 			},
-			weight: 4
+			weight: 4,
+			friction: 10
 		},
 		initialize: function(options) {
 			// Set the options

@@ -94,6 +94,12 @@ var Physics = {
 					// Apply friction
 					this.applyFriction(particle, 'x');
 					this.applyFriction(particle, 'y');
+					
+					// Slide the particle
+					this.slideParticle(particle, {
+						x: Math.floor(particle.options.position.x + particle.options.velocity.x),
+						y: Math.floor(particle.options.position.y + particle.options.velocity.y)
+					});
 				}.bind(this));
 				
 				// Fire the step event

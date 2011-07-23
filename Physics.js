@@ -94,7 +94,7 @@ var Physics = {
 						y: difference.y / steps
 					},
 					current = from,
-					i = null
+					i = null,
 					previous = null;
 				
 				// Loop over steps

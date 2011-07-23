@@ -89,6 +89,9 @@ var Physics = {
 					movement.larger = 'y';
 					movement.smaller = 'x';
 				}
+				
+				// Work out step for smaller
+				movement.step = movement.difference[movement.smaller] / movement.difference[movement.larger];
 			});
 		},
 		addParticle: function(particle) {

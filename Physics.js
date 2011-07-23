@@ -83,7 +83,11 @@ var Physics = {
 			
 			this.slideParticle = function(particle, to) {
 				// Iniailise variables
-				var from = particle.options.position;
+				var from = particle.options.position,
+					difference = {
+						x: to.x - from.x,
+						y: to.y - from.y
+					};
 			}.bind(this);
 			
 			this.step = function() {

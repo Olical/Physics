@@ -81,6 +81,10 @@ var Physics = {
 				}
 			}.bind(this);
 			
+			this.slideParticle = function(particle, to) {
+				
+			}.bind(this);
+			
 			this.step = function() {
 				// Loop over the particles
 				this.particles.each(function(particle) {

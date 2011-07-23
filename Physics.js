@@ -93,7 +93,13 @@ var Physics = {
 						x: difference.x / steps,
 						y: difference.y / steps
 					},
-					current = from;
+					current = from,
+					i = null;
+				
+				// Loop over steps
+				for(i = 0; i < steps; i += 1) {
+					
+				}
 			}.bind(this);
 			
 			this.step = function() {

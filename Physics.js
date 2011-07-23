@@ -74,7 +74,7 @@ var Physics = {
 			
 			this.applyFriction = function(particle, axis) {
 				// Apply friction
-				if(particle.options.velocity[axis] > 0 || particle.options.velocity[axis] < 0) {
+				if(particle.options.velocity[axis] !== 0) {
 					particle.options.velocity[axis] -= particle.options.velocity[axis] / particle.options.weight;
 				}
 				

@@ -44,6 +44,8 @@ var Physics = {
 					// Fire the alreadyRunning event
 					this.fireEvent('alreadyRunning');
 				}
+				
+				return this;
 			}.bind(this);
 			
 			this.stop = function() {
@@ -52,6 +54,8 @@ var Physics = {
 				
 				// Fire the stop event
 				this.fireEvent('stop');
+				
+				return this;
 			}.bind(this);
 			
 			this.moveParticle = function(particle, to) {
@@ -61,6 +65,8 @@ var Physics = {
 				
 				// Change the particles position option
 				particle.options.position = to;
+				
+				return this;
 			};
 			
 			this.step = function() {
@@ -72,6 +78,8 @@ var Physics = {
 				
 				// Fire the step event
 				this.fireEvent('step', [this.particles]);
+				
+				return this;
 			}.bind(this);
 			
 			this.addParticle = function(particle) {
@@ -83,6 +91,8 @@ var Physics = {
 				
 				// Fire the addParticle event
 				this.fireEvent('addParticle');
+				
+				return this;
 			}.bind(this);
 			
 			this.removeParticle = function(paticle) {
@@ -100,6 +110,8 @@ var Physics = {
 					// Fire the noParticle event
 					this.fireEvent('noParticle');
 				}
+				
+				return this;
 			}.bind(this);
 			
 			// Start the loop

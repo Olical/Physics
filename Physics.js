@@ -9,7 +9,8 @@ var Physics = {
 		options: {
 			fps: 12,
 			width: 500,
-			height: 500
+			height: 500,
+			size: 1
 		},
 		initialize: function(options) {
 			// Initialise variables

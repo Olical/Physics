@@ -12,7 +12,9 @@
 		<script type='text/javascript' src='Physics.js'></script>
 		<script type='text/javascript'>
 			var display = $('world').getContext('2d'),
-				world = new Physics.World();
+				world = new Physics.World({
+					size: 4
+				});
 				
 				world.addEvent('step', function(particles) {
 					// Every tick clear the screen
@@ -23,7 +25,7 @@
 					// Loop over particles
 					particles.each(function(particle) {
 						// Draw the particle
-						display.fillRect(particle.options.position.x, particle.options.position.y, 1, 1);
+						display.fillRect(particle.options.position.x * 4, particle.options.position.y * 4, 4, 4);
 					});
 				});
 		</script>

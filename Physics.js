@@ -71,6 +71,24 @@ var Physics = {
 						y: Math.floor(particle.options.position.y + particle.options.velocity.y)
 					}
 				};
+				
+				// Work out the difference
+				movement.difference = {
+					x: movement.to.x - movement.from.x,
+					y: movement.to.y - movement.from.y
+				};
+				
+				// Work out which axis is larger and vice versa
+				if(movement.difference.x >= movement.difference.y) {
+					// X is larger or the same
+					movement.larger = 'x';
+					movement.smaller = 'y';
+				}
+				else {
+					// Y is larger
+					movement.larger = 'y';
+					movement.smaller = 'x';
+				}
 			});
 		},
 		addParticle: function(particle) {

@@ -16,7 +16,15 @@
 				
 				world.addEvent('step', function(particles) {
 					// Every tick clear the screen
+					display.fillStyle = '#000000';
 					display.fillRect(0, 0, 500, 500);
+					display.fillStyle = '#FFFFFF';
+					
+					// Loop over particles
+					particles.each(function(particle) {
+						// Draw the particle
+						display.fillRect(particle.options.position.x, particle.options.position.y, 1, 1);
+					});
 				});
 		</script>
 	</body>

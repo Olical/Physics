@@ -93,15 +93,30 @@ var Physics = {
 						x: difference.x / steps,
 						y: difference.y / steps
 					},
-					current = {},
-					i = null;
+					current = from,
+					i = null
+					previous = null;
 				
 				// Loop over steps
 				for(i = 0; i < steps; i += 1) {
 					// Calculate current
+					previous = current;
 					current.x = Math.floor(from.x + (increment.x * i));
 					current.y = Math.floor(from.y + (increment.y * i));
+					
+					// Check if the point is within the bounds
+					if(current.x < 0 || current.y < 0 || current.x + this.options.size >= this.options.width || current.y + this.options.size >= this.options.height) {
+						// We need to stop, set the new location
+						this.moveParticle(particle, previous);
+						this.fireEvent('wallCollision', [particle]);
+						return this;
+					}
 				}
+				
+				// Set the new location
+				this.moveParticle(particle, to);
+				
+				return this;
 			}.bind(this);
 			
 			this.step = function() {

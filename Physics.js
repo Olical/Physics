@@ -82,7 +82,36 @@ var Physics = {
 			}.bind(this);
 			
 			this.slideParticle = function(particle, to) {
+				// Iniailise variables
+				var from = particle.options.position,
+					increments = {},
+					lengths = {},
+					length = null,
+					x = null,
+					y = null;
 				
+				// Work out the lengths
+				lengths.x = to.x - from.x;
+				lengths.y = to.y - from.y;
+				
+				// Workout the real length (longest length)
+				if(lengths.x >= lengths.y) {
+					length = lengths.x;
+				}
+				else {
+					length = lengths.y;
+				}
+				
+				// Work out the increments
+				increments.x = lengths.x / length;
+				increments.y = lengths.y / length;
+				
+				// Loop over the coordinates
+				for(x = from.x; x !== to.x; x += increments.x) {
+					for(y = from.y; y !== to.y; y += increments.y) {
+						
+					}
+				}
 			}.bind(this);
 			
 			this.step = function() {

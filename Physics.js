@@ -7,7 +7,7 @@ var Physics = {
 	World: new Class({
 		Implements: [Events, Options],
 		options: {
-			fps: 12,
+			fps: 16,
 			width: 500,
 			height: 500,
 			size: 1

@@ -53,6 +53,15 @@ var Physics = {
 				this.fireEvent('stop');
 			}.bind(this);
 			
+			this.moveParticle = function(particle, to) {
+				// Change the positions object value
+				this.positions[particle.options.position.x][particle.options.position.y] = false;
+				this.positions[to.x][to.y] = particle;
+				
+				// Change the particles position option
+				particle.options.position = to;
+			};
+			
 			this.step = function() {
 				// Loop over the particles
 				this.particles.each(function(particle) {

@@ -66,7 +66,8 @@ var Physics = {
 			this.step = function() {
 				// Loop over the particles
 				this.particles.each(function(particle) {
-					
+					// Apply weight
+					particle.options.velocity.y += particle.options.weight;
 				}.bind(this));
 				
 				// Fire the step event

@@ -55,7 +55,8 @@ var Physics = {
 			// Loop over the particles
 			this.particles.each(function(particle) {
 				// Initialise variables
-				var movement = null;
+				var movement = null,
+					check = {};
 				
 				// Apply weight to velocity on the y axis
 				particle.options.velocity.y += particle.options.weight;
@@ -71,6 +72,9 @@ var Physics = {
 						y: Math.floor(particle.options.position.y + particle.options.velocity.y)
 					}
 				};
+				
+				// Set up current
+				movement.current = movement.from;
 				
 				// Work out the difference
 				movement.difference = {
@@ -90,9 +94,35 @@ var Physics = {
 					movement.smaller = 'x';
 				}
 				
-				// Work out step for smaller
-				movement.step = movement.difference[movement.smaller] / movement.difference[movement.larger];
-			});
+				// Work out step
+				movement.step = {
+					smaller: movement.difference[movement.smaller] / movement.difference[movement.larger]
+				};
+				
+				if(movement.from[movement.larger] > movement.to[movement.larger]) {
+					movement.step.larger = -1;
+				}
+				else {
+					movement.step.larger = 1;
+				}
+				
+				// Keep looping til the larger matches
+				while(movement.current[movement.larger] !== movement.to[movement.larger]) {
+					// Set up check
+					check[movement.larger] = movement.current[movement.larger] + movement.step.larger;
+					check[movement.smaller] = Math.floor(movement.current[movement.smaller] + movement.step.smaller);
+					
+					// Check if there is anything at this position
+					if(this.particles[check.x]) {
+						if(this.particles[check.x][check.y]) {
+							// There is, so set the position to the current
+							// And fire a collision with the two particles
+							particle.options.position = movement.current;
+							this.fireEvent('collision', particle, this.particles[check.x][check.y]);
+						}
+					}
+				}
+			}.bind(this));
 		},
 		addParticle: function(particle) {
 			// Add the particle to the particles array

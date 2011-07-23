@@ -119,9 +119,24 @@ var Physics = {
 							// And fire a collision with the two particles
 							particle.options.position = movement.current;
 							this.fireEvent('collision', particle, this.particles[check.x][check.y]);
+							return true;
 						}
 					}
+					
+					// Check if its still inside the bounds
+					if(check.x < 0 && check.y < 0 && check.x >= this.options.width && check.y >= this.options.height) {
+						// It is not, fire a wall collision and set the position
+						particle.options.position = movement.current;
+						this.fireEvent('wallCollision', particle);
+						return true;
+					}
+					
+					// There was nothing here, set current to check
+					movement.current = check;
 				}
+				
+				// We made it through the loop, set particles position to current
+				particle.options.position = movement.current;
 			}.bind(this));
 		},
 		addParticle: function(particle) {

@@ -14,8 +14,8 @@
 			var display = $('world').getContext('2d'),
 				world = new Physics.World({
 					size: 4,
-					width: 500,
-					height: 500
+					width: 125,
+					height: 125
 				});
 				
 				world.addEvent('step', function(particles) {
@@ -27,7 +27,7 @@
 					// Loop over particles
 					particles.each(function(particle) {
 						// Draw the particle
-						display.fillRect(particle.options.position.x, particle.options.position.y, 4, 4);
+						display.fillRect(particle.options.position.x * 4, particle.options.position.y * 4, 4, 4);
 					});
 				});
 				

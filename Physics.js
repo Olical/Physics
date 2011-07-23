@@ -92,7 +92,8 @@ var Physics = {
 					increment = {
 						x: difference.x / steps,
 						y: difference.y / steps
-					};
+					},
+					current = from;
 			}.bind(this);
 			
 			this.step = function() {

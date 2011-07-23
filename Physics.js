@@ -17,7 +17,9 @@ var Physics = {
 				y = null;
 			
 			// Set the options
-			this.setOptions(options);
+			if(options) {
+				this.setOptions(options);
+			}
 			
 			this.particles = [];
 			this.positions = [];
@@ -190,7 +192,9 @@ var Physics = {
 		},
 		initialize: function(options) {
 			// Set the options
-			this.setOptions(options);
+			if(options) {
+				this.setOptions(options);
+			}
 		}
 	})
 };

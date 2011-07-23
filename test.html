@@ -13,13 +13,17 @@
 		<script type='text/javascript'>
 			var display = $('world').getContext('2d'),
 				world = new Physics.World({
-					size: 4
+					size: 4,
+					width: 100,
+					height: 100
 				});
 				
 				world.addEvent('step', function(particles) {
 					// Every tick clear the screen
 					display.fillStyle = '#000000';
 					display.fillRect(0, 0, 500, 500);
+					display.fillStyle = '#333333';
+					display.fillRect(0, 0, 100, 100);
 					display.fillStyle = '#FFFFFF';
 					
 					// Loop over particles

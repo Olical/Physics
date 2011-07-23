@@ -28,6 +28,14 @@
 						display.fillRect(particle.options.position.x * 4, particle.options.position.y * 4, 4, 4);
 					});
 				});
+				
+				// Add a test particle
+				world.addParticle(new Physics.Particle({
+					position: {
+						x: 10,
+						y: 18
+					}
+				}));
 		</script>
 	</body>
 </html>

@@ -29,6 +29,14 @@
 					});
 				});
 				
+				// Listen for wall collisions and move it to the top if we hit one
+				world.addEvent('wallCollision', function(particle) {
+					world.moveParticle(particle, {
+						x: 30,
+						y: 4
+					});
+				});
+				
 				// Add a test particle
 				world.addParticle(new Physics.Particle({
 					position: {

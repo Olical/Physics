@@ -74,6 +74,10 @@ var Physics = {
 				this.particles.each(function(particle) {
 					// Apply weight
 					particle.options.velocity.y += particle.options.weight;
+					
+					// Apply friction
+					particle.options.velocity.x -= particle.options.velocity.x / (particle.options.weight / 2);
+					particle.options.velocity.y -= particle.options.velocity.y / particle.options.weight;
 				}.bind(this));
 				
 				// Fire the step event

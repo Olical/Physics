@@ -23,8 +23,8 @@ var Physics = {
 			this.positions = [];
 			this.interval = false;
 			
-			for(x = 0; x < options.width; x += 1) {
-				for(y = 0; y < options.height; y += 1) {
+			for(x = 0; x < this.options.width; x += 1) {
+				for(y = 0; y < this.options.height; y += 1) {
 					this.positions[x] = [];
 					this.positions[x][y] = false;
 				}

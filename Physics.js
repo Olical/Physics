@@ -60,7 +60,7 @@ var Physics = {
 				}.bind(this));
 				
 				// Fire the step event
-				this.fireEvent('step');
+				this.fireEvent('step', this.particles);
 			}.bind(this);
 			
 			this.addParticle = function(particle) {

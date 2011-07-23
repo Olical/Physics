@@ -14,7 +14,7 @@
 			var display = $('world').getContext('2d'),
 				world = new Physics.World();
 				
-				world.addEvent('step', function() {
+				world.addEvent('step', function(particles) {
 					// Every tick clear the screen
 					display.fillRect(0, 0, 500, 500);
 				});

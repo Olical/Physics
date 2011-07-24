@@ -17,8 +17,10 @@
 					width: 125,
 					height: 125,
 					fps: 24
-				});
+				}),
+				drawing = false;
 				
+				// Draw display on step
 				world.addEvent('step', function(particles) {
 					// Every tick clear the screen
 					display.fillStyle = '#000000';
@@ -32,18 +34,29 @@
 					});
 				});
 				
-				// Add a click event to add particles
-				canvas.addEvent('click', function(e) {
-					world.addParticle(new Physics.Particle({
-						position: {
-							x: Math.floor(e.event.offsetX / 4),
-							y: Math.floor(e.event.offsetY / 4)
-						},
-						velocity: {
-							x: Number.random(-20, 20),
-							y: Number.random(-20, 20)
-						}
-					}));
+				// Allow drawing of particles
+				canvas.addEvent('mousedown', function(e) {
+					drawing = true;
+				});
+				
+				canvas.addEvent('mouseup', function(e) {
+					drawing = false;
+				});
+				
+				canvas.addEvent('mousemove', function(e) {
+					// Draw new particles if drawing
+					if(drawing) {
+						world.addParticle(new Physics.Particle({
+							position: {
+								x: Math.floor(e.event.offsetX / 4),
+								y: Math.floor(e.event.offsetY / 4)
+							},
+							velocity: {
+								x: Number.random(-20, 20),
+								y: Number.random(-20, 20)
+							}
+						}));
+					}
 				});
 		</script>
 	</body>

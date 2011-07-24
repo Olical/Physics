@@ -142,7 +142,7 @@ var Physics = {
 			
 			this.addParticle = function(particle) {
 				// Make sure the point is empty
-				if(this.positions[particle.options.position.x][particle.options.position.y] === false) {
+				if(!this.positions[particle.options.position.x][particle.options.position.y]) {
 					// Add the particle to the particles array
 					this.particles.push(particle);
 					

@@ -62,6 +62,9 @@ var Physics = {
 				to.x = to.x.limit(0, this.options.width - 1);
 				to.y = to.y.limit(0, this.options.height - 1);
 				
+				particle.options.position.x = particle.options.position.x.limit(0, this.options.width - 1);
+				particle.options.position.y = particle.options.position.y.limit(0, this.options.height - 1);
+				
 				// Change the positions object value
 				this.positions[particle.options.position.x][particle.options.position.y] = false;
 				this.positions[to.x][to.y] = particle;
@@ -106,14 +109,6 @@ var Physics = {
 					previous = current;
 					current.x = Math.floor(from.x + (increment.x * i));
 					current.y = Math.floor(from.y + (increment.y * i));
-					
-					// Check if the point is within the bounds
-					if(current.x < 0 || current.y < 0 || current.x >= this.options.width || current.y >= this.options.height) {
-						// We need to stop, set the new location
-						this.moveParticle(particle, previous);
-						this.fireEvent('wallCollision', [particle]);
-						return this;
-					}
 				}
 				
 				// Set the new location

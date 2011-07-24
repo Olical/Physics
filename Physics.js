@@ -92,28 +92,32 @@ var Physics = {
 						x: difference.x / steps,
 						y: difference.y / steps
 					},
-					current = from,
-					previous = current,
+					current = {},
 					i = null;
 				
-				// Loop over steps
-				for(i = 1; i <= steps; i += 1) {
-					// Calculate current
-					previous = current;
-					current.x = Math.floor(from.x + (increment.x * i));
-					current.y = Math.floor(from.y + (increment.y * i));
+				// Keep looping back to try and find a sutible gap
+				for(i = steps; i > 0; i -= 1) {
+					current.x = Math.floor(from.x + increment.x * i);
+					current.y = Math.floor(from.y + increment.y * i);
 					
-					// Make sure the point we are moving to is empty
-					if(this.positions[current.x] && this.positions[current.x][current.y]) {
-						// Theres something there, move to previous and emit a collision event
-						this.moveParticle(particle, previous);
-						this.fireEvent('collision', [particle, this.positions[current.x][current.y]]);
-						return this;
+					// Check if the point is within the bounds
+					if(current.x.limit(0, this.options.width - 1) === current.x && current.y.limit(0, this.options.height - 1) === current.y) {
+						// It is, now check if that point is free
+						if(!this.positions[current.x][current.y]) {
+							// It is, move to it, and break out
+							this.moveParticle(particle, current);
+							break;
+						}
+						else {
+							// We have hit something, fire the event
+							this.fireEvent('collision', [particle, this.positions[current.x][current.y]]);
+						}
+					}
+					else {
+						// We have hit a wall, fire the event
+						this.fireEvent('wallCollision', [particle]);
 					}
 				}
-				
-				// Set the new location
-				this.moveParticle(particle, to);
 				
 				return this;
 			}.bind(this);

@@ -11,7 +11,8 @@
 		<script type='text/javascript' src='MooTools.js'></script>
 		<script type='text/javascript' src='Physics.js'></script>
 		<script type='text/javascript'>
-			var display = $('world').getContext('2d'),
+			var canvas = $('world'),
+				display = canvas.getContext('2d'),
 				world = new Physics.World({
 					width: 125,
 					height: 125
@@ -30,13 +31,15 @@
 					});
 				});
 				
-				// Add a test particle
-				world.addParticle(new Physics.Particle({
-					position: {
-						x: 10,
-						y: 18
-					}
-				}));
+				// Add a click event to add particles
+				canvas.addEvent('click', function(e) {
+					world.addParticle(new Physics.Particle({
+						position: {
+							x: Math.floor(e.event.offsetX / 4),
+							y: Math.floor(e.event.offsetY / 4)
+						}
+					}));
+				});
 		</script>
 	</body>
 </html>

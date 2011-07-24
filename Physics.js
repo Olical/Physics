@@ -109,6 +109,14 @@ var Physics = {
 					previous = current;
 					current.x = Math.floor(from.x + (increment.x * i));
 					current.y = Math.floor(from.y + (increment.y * i));
+					
+					// Make sure the point we are moving to is empty
+					if(this.particles[current.x] && this.particles[current.x][current.y]) {
+						// Theres something there, move to previous and emit a collision event
+						this.moveParticle(particle, previous);
+						this.fireEvent('collision', [particle, this.particles[current.x][current.y]]);
+						return this;
+					}
 				}
 				
 				// Set the new location

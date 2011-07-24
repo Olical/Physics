@@ -192,7 +192,7 @@ var Physics = {
 				x: 0,
 				y: 0
 			},
-			weight: 4
+			weight: 3
 		},
 		initialize: function(options) {
 			// Set the options

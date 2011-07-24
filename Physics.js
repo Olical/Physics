@@ -87,7 +87,7 @@ var Physics = {
 						x: to.x - from.x,
 						y: to.y - from.y
 					},
-					steps = (difference.x >= difference.y) ? difference.x : difference.y,
+					steps = (difference.x.abs() >= difference.y.abs()) ? difference.x.abs() : difference.y.abs(),
 					increment = {
 						x: difference.x / steps,
 						y: difference.y / steps
@@ -130,7 +130,12 @@ var Physics = {
 				// Loop over the particles
 				this.particles.each(function(particle) {
 					// Apply weight
-					particle.options.velocity.y += particle.options.weight;
+					if(!particle.options.gas) {
+						particle.options.velocity.y += particle.options.weight;
+					}
+					else {
+						particle.options.velocity.y -= particle.options.weight;
+					}
 					
 					// Apply friction
 					this.applyFriction(particle, 'x');
@@ -209,7 +214,8 @@ var Physics = {
 			collided: {
 				wall: false,
 				particle: false
-			}
+			},
+			gas: false
 		},
 		initialize: function(options) {
 			// Set the options

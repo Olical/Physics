@@ -97,8 +97,8 @@ var Physics = {
 				
 				// Keep looping back to try and find a sutible gap
 				for(i = steps; i > 0; i -= 1) {
-					current.x = Math.floor(from.x + increment.x * i);
-					current.y = Math.floor(from.y + increment.y * i);
+					current.x = (from.x + increment.x * i).floor();
+					current.y = (from.y + increment.y * i).floor();
 					
 					// Check if the point is within the bounds
 					if(current.x.limit(0, this.options.width - 1) === current.x && current.y.limit(0, this.options.height - 1) === current.y) {
@@ -143,8 +143,8 @@ var Physics = {
 					
 					// Slide the particle
 					this.slideParticle(particle, {
-						x: Math.floor(particle.options.position.x + particle.options.velocity.x),
-						y: Math.floor(particle.options.position.y + particle.options.velocity.y)
+						x: (particle.options.position.x + particle.options.velocity.x).floor(),
+						y: (particle.options.position.y + particle.options.velocity.y).floor()
 					});
 				}.bind(this));
 				

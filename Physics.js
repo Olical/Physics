@@ -58,6 +58,9 @@ var Physics = {
 			}.bind(this);
 			
 			this.moveParticle = function(particle, to) {
+				// Update the last posision
+				particle.options.last = particle.options.position;
+				
 				// Change the positions object value
 				this.positions[particle.options.position.x][particle.options.position.y] = false;
 				this.positions[to.x][to.y] = particle;
@@ -104,16 +107,16 @@ var Physics = {
 					if(current.x.limit(0, this.options.width - 1) === current.x && current.y.limit(0, this.options.height - 1) === current.y) {
 						// It is, now check if that point is free
 						if(!this.positions[current.x][current.y]) {
-							// It is, move to it, and break out
+							// It is, move to the new one and break out
 							this.moveParticle(particle, current);
 							break;
 						}
-						else {
+						else if(from !== particle.options.last) {
 							// We have hit something, fire the event
 							this.fireEvent('collision', [particle, this.positions[current.x][current.y]]);
 						}
 					}
-					else {
+					else if(from !== particle.options.last) {
 						// We have hit a wall, fire the event
 						this.fireEvent('wallCollision', [particle]);
 					}

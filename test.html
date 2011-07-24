@@ -34,6 +34,38 @@
 					});
 				});
 				
+				// Allow world nudging
+				document.addEvent('keydown', function(e) {
+					var f = 50,
+						axis = null,
+						force = null;
+					
+					switch(e.key) {
+						case 'up':
+							axis = 'y';
+							force = -f;
+							break;
+						case 'right':
+							axis = 'x';
+							force = f;
+							break;
+						case 'down':
+							axis = 'y';
+							force = f;
+							break;
+						case 'left':
+							axis = 'x';
+							force = -f;
+							break;
+					}
+					
+					if(axis) {
+						world.particles.each(function(particle) {
+							particle.options.velocity[axis] += force;
+						});
+					}
+				});
+				
 				// Allow drawing of particles
 				canvas.addEvent('mousedown', function(e) {
 					drawing = true;

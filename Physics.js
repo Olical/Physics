@@ -111,12 +111,12 @@ var Physics = {
 							this.moveParticle(particle, current);
 							break;
 						}
-						else if(from !== particle.options.last) {
+						else {
 							// We have hit something, fire the event
 							this.fireEvent('collision', [particle, this.positions[current.x][current.y]]);
 						}
 					}
-					else if(from !== particle.options.last) {
+					else {
 						// We have hit a wall, fire the event
 						this.fireEvent('wallCollision', [particle]);
 					}

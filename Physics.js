@@ -141,14 +141,22 @@ var Physics = {
 			}.bind(this);
 			
 			this.addParticle = function(particle) {
-				// Add the particle to the particles array
-				this.particles.push(particle);
-				
-				// Add it into the positions index
-				this.positions[particle.options.position.x][particle.options.position.y] = particle;
-				
-				// Fire the addParticle event
-				this.fireEvent('addParticle');
+				// Make sure the point is empty
+				if(this.positions[particle.options.position.x][particle.options.position.y] === false) {
+					// Add the particle to the particles array
+					this.particles.push(particle);
+					
+					// Add it into the positions index
+					this.positions[particle.options.position.x][particle.options.position.y] = particle;
+					
+					// Fire the addParticle event
+					this.fireEvent('addParticle');
+				}
+				else {
+					// Theres something already there
+					// Fire the inUse event
+					this.fireEvent('inUse');
+				}
 				
 				return this;
 			}.bind(this);

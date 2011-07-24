@@ -208,6 +208,9 @@ var Physics = {
 			if(options) {
 				this.setOptions(options);
 			}
+			
+			// Set the last
+			this.options.last = this.options.position;
 		}
 	})
 };

@@ -176,6 +176,7 @@ var Physics = {
 				// If it is not -1 then splice it out
 				if(index !== -1) {
 					this.particles.splice(index, 1);
+					this.positions[particle.options.posision.x][particle.options.posision.y] = false;
 					
 					// Fire the removeParticle event
 					this.fireEvent('removeParticle', [particle]);

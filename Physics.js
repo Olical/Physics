@@ -58,9 +58,6 @@ var Physics = {
 			}.bind(this);
 			
 			this.moveParticle = function(particle, to) {
-				// Update the last posision
-				particle.options.last = particle.options.position;
-				
 				// Change the positions object value
 				this.positions[particle.options.position.x][particle.options.position.y] = false;
 				this.positions[to.x][to.y] = particle;
@@ -211,9 +208,6 @@ var Physics = {
 			if(options) {
 				this.setOptions(options);
 			}
-			
-			// Set the last
-			this.options.last = this.options.position;
 		}
 	})
 };

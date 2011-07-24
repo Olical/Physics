@@ -153,7 +153,7 @@ var Physics = {
 				return this;
 			}.bind(this);
 			
-			this.removeParticle = function(paticle) {
+			this.removeParticle = function(particle) {
 				// Get the index of the paticle in the particles array
 				var index = this.particles.indexOf(particle);
 				
@@ -162,7 +162,7 @@ var Physics = {
 					this.particles.splice(index, 1);
 					
 					// Fire the removeParticle event
-					this.fireEvent('addParticle');
+					this.fireEvent('removeParticle', [particle]);
 				}
 				else {
 					// Fire the noParticle event

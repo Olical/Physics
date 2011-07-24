@@ -58,13 +58,6 @@ var Physics = {
 			}.bind(this);
 			
 			this.moveParticle = function(particle, to) {
-				// Make sure to is within the bounds
-				to.x = to.x.limit(0, this.options.width - 1);
-				to.y = to.y.limit(0, this.options.height - 1);
-				
-				particle.options.position.x = particle.options.position.x.limit(0, this.options.width - 1);
-				particle.options.position.y = particle.options.position.y.limit(0, this.options.height - 1);
-				
 				// Change the positions object value
 				this.positions[particle.options.position.x][particle.options.position.y] = false;
 				this.positions[to.x][to.y] = particle;

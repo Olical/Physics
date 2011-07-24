@@ -15,7 +15,8 @@
 				display = canvas.getContext('2d'),
 				world = new Physics.World({
 					width: 125,
-					height: 125
+					height: 125,
+					fps: 24
 				});
 				
 				world.addEvent('step', function(particles) {

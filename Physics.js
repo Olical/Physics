@@ -150,12 +150,12 @@ var Physics = {
 					this.positions[particle.options.position.x][particle.options.position.y] = particle;
 					
 					// Fire the addParticle event
-					this.fireEvent('addParticle');
+					this.fireEvent('addParticle', [particle]);
 				}
 				else {
 					// Theres something already there
 					// Fire the inUse event
-					this.fireEvent('inUse');
+					this.fireEvent('inUse', [particle, this.positions[particle.options.position.x][particle.options.position.y]]);
 				}
 				
 				return this;
@@ -174,7 +174,7 @@ var Physics = {
 				}
 				else {
 					// Fire the noParticle event
-					this.fireEvent('noParticle');
+					this.fireEvent('noParticle', [particle]);
 				}
 				
 				return this;

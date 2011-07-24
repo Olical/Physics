@@ -104,14 +104,14 @@ var Physics = {
 					i = null;
 				
 				// Loop over steps
-				for(i = 0; i < steps; i += 1) {
+				for(i = 1; i <= steps; i += 1) {
 					// Calculate current
 					previous = current;
 					current.x = Math.floor(from.x + (increment.x * i));
 					current.y = Math.floor(from.y + (increment.y * i));
 					
 					// Make sure the point we are moving to is empty
-					if(this.positions[current.x] && this.positions[current.x][current.y] && this.positions[current.x][current.y] !== particle) {
+					if(this.positions[current.x] && this.positions[current.x][current.y]) {
 						// Theres something there, move to previous and emit a collision event
 						this.moveParticle(particle, previous);
 						this.fireEvent('collision', [particle, this.positions[current.x][current.y]]);

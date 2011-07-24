@@ -104,17 +104,21 @@ var Physics = {
 					if(current.x.limit(0, this.options.width - 1) === current.x && current.y.limit(0, this.options.height - 1) === current.y) {
 						// It is, now check if that point is free
 						if(!this.positions[current.x][current.y]) {
-							// It is, move to the new one and break out
+							// It is, reset collisions, move to the new one and break out
+							particle.options.collided.wall = false;
+							particle.options.collided.particle = false;
 							this.moveParticle(particle, current);
 							break;
 						}
-						else {
-							// We have hit something, fire the event
+						else if(!particle.options.collided.particle) {
+							// We have hit something, fire the event and set the collided variable
+							particle.options.collided.particle = true;
 							this.fireEvent('collision', [particle, this.positions[current.x][current.y]]);
 						}
 					}
-					else {
-						// We have hit a wall, fire the event
+					else if(!particle.options.collided.wall) {
+						// We have hit a wall, fire the event and set the collided variable
+						particle.options.collided.wall = true;
 						this.fireEvent('wallCollision', [particle]);
 					}
 				}
@@ -201,7 +205,11 @@ var Physics = {
 				x: 0,
 				y: 0
 			},
-			weight: 3
+			weight: 3,
+			collided: {
+				wall: false,
+				particle: false
+			}
 		},
 		initialize: function(options) {
 			// Set the options

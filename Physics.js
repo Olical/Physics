@@ -157,9 +157,9 @@ var Physics = {
 				return this;
 			}.bind(this);
 			
-			this.addParticle = function(particle) {
+			this.addParticle = function(particle, force) {
 				// Make sure the point is empty
-				if(!this.positions[particle.options.position.x][particle.options.position.y]) {
+				if(!this.positions[particle.options.position.x][particle.options.position.y] || force) {
 					// Add the particle to the particles array
 					this.particles.push(particle);
 					

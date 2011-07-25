@@ -106,11 +106,13 @@ var Physics = {
 						// Point is out of bounds
 						// Move to previous, fire event, break out
 					}
-					else if(this.positions[current.x][current.y]) {
+					
+					if(this.positions[current.x][current.y]) {
 						// Point is occupied
 						// Move to previous, fire event, break out
 					}
-					else if(current.x === to.x && current.y === to.y) {
+					
+					if(current.x === to.x && current.y === to.y) {
 						// Point is final destination, move to it and break out
 					}
 				}

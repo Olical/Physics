@@ -101,7 +101,7 @@ var Physics = {
 					current.y = (from.y + increment.y * i).floor();
 					
 					// Check if the point is within the bounds
-					if(current.x.limit(0, this.options.width - 1) === current.x && current.y.limit(0, this.options.height - 1) === current.y) {
+					if(current.x >= 0 && current.y >= 0 && current.x < this.options.width && current.y < this.options.height) {
 						// It is, now check if that point is free
 						if(!this.positions[current.x][current.y]) {
 							// It is, reset collisions, move to the new one and break out

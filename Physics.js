@@ -129,23 +129,26 @@ var Physics = {
 			this.step = function() {
 				// Loop over the particles
 				this.particles.each(function(particle) {
-					// Apply weight
-					if(!particle.options.gas) {
-						particle.options.velocity.y += particle.options.weight;
+					// Only do stuff if locked is false
+					if(!particle.options.locked) {
+						// Apply weight
+						if(!particle.options.gas) {
+							particle.options.velocity.y += particle.options.weight;
+						}
+						else {
+							particle.options.velocity.y -= particle.options.weight;
+						}
+						
+						// Apply friction
+						this.applyFriction(particle, 'x');
+						this.applyFriction(particle, 'y');
+						
+						// Slide the particle
+						this.slideParticle(particle, {
+							x: (particle.options.position.x + particle.options.velocity.x).floor(),
+							y: (particle.options.position.y + particle.options.velocity.y).floor()
+						});
 					}
-					else {
-						particle.options.velocity.y -= particle.options.weight;
-					}
-					
-					// Apply friction
-					this.applyFriction(particle, 'x');
-					this.applyFriction(particle, 'y');
-					
-					// Slide the particle
-					this.slideParticle(particle, {
-						x: (particle.options.position.x + particle.options.velocity.x).floor(),
-						y: (particle.options.position.y + particle.options.velocity.y).floor()
-					});
 				}.bind(this));
 				
 				// Fire the step event
@@ -215,7 +218,8 @@ var Physics = {
 				wall: false,
 				particle: false
 			},
-			gas: false
+			gas: false,
+			locked: false
 		},
 		initialize: function(options) {
 			// Set the options

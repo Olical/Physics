@@ -92,30 +92,35 @@ var Physics = {
 						x: difference.x / steps,
 						y: difference.y / steps
 					},
-					current = {},
-					previous = null,
-					i = null;
+					current = from,
+					previous = {};
 				
-				// Keep looping back to try and find a sutible gap
-				for(i = 1; i <= steps; i += 1) {
-					previous = current;
-					current.x = (from.x + increment.x * i).floor();
-					current.y = (from.y + increment.y * i).floor();
+				// Keep going til we hit to end position
+				while(current.x !== to.x && current.y !== to.y) {
+					previous.x = current.x;
+					previous.y = current.y;
+					current.x = (current.x + increment.x).floor();
+					current.y = (current.y + increment.y).floor();
 					
-					if(current.x < 0 && current.y < 0 && current.x >= this.options.width && current.y >= this.options.height) {
-						// Point is out of bounds
-						// Move to previous, fire event, break out
+					// Check if this is at a wall
+					if(current.x === 0 || current.y === 0 || current.x === this.options.width - 1 || current.y === this.options.height - 1) {
+						// We have hit a wall, move to it, fire the event and return
+						this.moveParticle(particle, current);
+						//FIREEVENT
+						return this;
 					}
 					
+					// Check if the point is in use
 					if(this.positions[current.x][current.y]) {
-						// Point is occupied
-						// Move to previous, fire event, break out
-					}
-					
-					if(current.x === to.x && current.y === to.y) {
-						// Point is final destination, move to it and break out
+						// It is, move to the previous, fire the event and return
+						this.moveParticle(particle, previous);
+						//FIREEVENT
+						return this;
 					}
 				}
+				
+				// Move to the end position
+				this.moveParticle(particle, to);
 				
 				return this;
 			}.bind(this);
@@ -139,8 +144,8 @@ var Physics = {
 						
 						// Slide the particle
 						this.slideParticle(particle, {
-							x: (particle.options.position.x + particle.options.velocity.x).floor(),
-							y: (particle.options.position.y + particle.options.velocity.y).floor()
+							x: (particle.options.position.x + particle.options.velocity.x).floor().limit(0, this.options.width - 1),
+							y: (particle.options.position.y + particle.options.velocity.y).floor().limit(0, this.options.height - 1)
 						});
 					}
 				}.bind(this));

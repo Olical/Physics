@@ -93,6 +93,8 @@ var Physics = {
 						y: difference.y / steps
 					},
 					current = {},
+					best = to,
+					collided = {},
 					i = null;
 				
 				// Keep looping back to try and find a sutible gap
@@ -104,23 +106,36 @@ var Physics = {
 					if(current.x >= 0 && current.y >= 0 && current.x < this.options.width && current.y < this.options.height) {
 						// It is, now check if that point is free
 						if(!this.positions[current.x][current.y]) {
-							// It is, reset collisions, move to the new one and break out
-							particle.options.collided.wall = false;
-							particle.options.collided.particle = false;
-							this.moveParticle(particle, current);
-							break;
+							// It is, if best is falsy, set it to current
+							if(!best) {
+								best = current;
+							}
 						}
-						else if(!particle.options.collided.particle) {
-							// We have hit something, fire the event and set the collided variable
-							particle.options.collided.particle = true;
-							this.fireEvent('collision', [particle, this.positions[current.x][current.y]]);
+						else {
+							// We have hit something, make the best falsy and register collision
+							best = false;
+							collided.particle = true;
 						}
 					}
-					else if(!particle.options.collided.wall) {
-						// We have hit a wall, fire the event and set the collided variable
-						particle.options.collided.wall = true;
-						this.fireEvent('wallCollision', [particle]);
+					else {
+						// We have hit a wall, make the best falsy and register collision
+						best = false;
+						collided.wall = true;
 					}
+				}
+				
+				// Fire collision events
+				if(collided.particle) {
+					this.fireEvent('collision', [particle, this.positions[current.x][current.y]]);
+				}
+				
+				if(collided.wall) {
+					this.fireEvent('wallCollision', [particle]);
+				}
+				
+				// If we have a best, move to it
+				if(best) {
+					this.moveParticle(particle, best);
 				}
 				
 				return this;
@@ -214,10 +229,6 @@ var Physics = {
 				y: 0
 			},
 			weight: 3,
-			collided: {
-				wall: false,
-				particle: false
-			},
 			gas: false,
 			locked: false
 		},

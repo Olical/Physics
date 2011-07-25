@@ -92,7 +92,8 @@ var Physics = {
 						x: difference.x / steps,
 						y: difference.y / steps
 					},
-					current = {}
+					current = {},
+					events = {},
 					best = null;
 				
 				// Loop over steps
@@ -111,14 +112,14 @@ var Physics = {
 							};
 						}
 						else {
-							// We have hit a particle, fire the collision event and break out
-							this.fireEvent('collision', [particle, this.positions[current.x][current.y]]);
+							// We have hit a particle, ready the collision event and break out
+							events.particle = true;
 							break;
 						}
 					}
 					else {
-						// We have hit the wall, fire the event and break out
-						this.fireEvent('wallCollision', [particle]);
+						// We have hit the wall, ready the event and break out
+						events.wall = true;
 						break;
 					}
 				}
@@ -126,6 +127,15 @@ var Physics = {
 				// If there is a best, move to it
 				if(best) {
 					this.moveParticle(particle, best);
+				}
+				
+				// Fire events
+				if(events.particle) {
+					this.fireEvent('collision', [particle, this.positions[current.x][current.y]]);
+				}
+				
+				if(events.wall) {
+					this.fireEvent('wallCollision', [particle]);
 				}
 				
 				return this;

@@ -93,49 +93,26 @@ var Physics = {
 						y: difference.y / steps
 					},
 					current = {},
-					best = to,
-					collided = {},
+					previous = null,
 					i = null;
 				
 				// Keep looping back to try and find a sutible gap
-				for(i = steps; i > 0; i -= 1) {
+				for(i = 1; i <= steps; i += 1) {
+					previous = current;
 					current.x = (from.x + increment.x * i).floor();
 					current.y = (from.y + increment.y * i).floor();
 					
-					// Check if the point is within the bounds
-					if(current.x >= 0 && current.y >= 0 && current.x < this.options.width && current.y < this.options.height) {
-						// It is, now check if that point is free
-						if(!this.positions[current.x][current.y]) {
-							// It is, if best is falsy, set it to current
-							if(!best) {
-								best = current;
-							}
-						}
-						else {
-							// We have hit something, make the best falsy and register collision
-							best = false;
-							collided.particle = true;
-						}
+					if(current.x < 0 && current.y < 0 && current.x >= this.options.width && current.y >= this.options.height) {
+						// Point is out of bounds
+						// Move to previous, fire event, break out
 					}
-					else {
-						// We have hit a wall, make the best falsy and register collision
-						best = false;
-						collided.wall = true;
+					else if(this.positions[current.x][current.y]) {
+						// Point is occupied
+						// Move to previous, fire event, break out
 					}
-				}
-				
-				// Fire collision events
-				if(collided.particle) {
-					this.fireEvent('collision', [particle, this.positions[current.x][current.y]]);
-				}
-				
-				if(collided.wall) {
-					this.fireEvent('wallCollision', [particle]);
-				}
-				
-				// If we have a best, move to it
-				if(best) {
-					this.moveParticle(particle, best);
+					else if(current.x === to.x && current.y === to.y) {
+						// Point is final destination, move to it and break out
+					}
 				}
 				
 				return this;

@@ -92,48 +92,38 @@ var Physics = {
 						x: difference.x / steps,
 						y: difference.y / steps
 					},
-					current = {},
-					best = to,
-					collided = {},
-					i = null;
+					current = {}
+					best = null;
 				
-				// Keep looping back to try and find a sutible gap
-				for(i = steps; i > 0; i -= 1) {
+				// Loop over steps
+				for(i = 1; i <= steps; i += 1) {
 					current.x = (from.x + increment.x * i).floor();
 					current.y = (from.y + increment.y * i).floor();
 					
-					// Check if the point is within the bounds
+					// Check current is in bounds
 					if(current.x >= 0 && current.y >= 0 && current.x < this.options.width && current.y < this.options.height) {
-						// It is, now check if that point is free
+						// Check point is not occupied
 						if(!this.positions[current.x][current.y]) {
-							// It is, if best is falsy, set it to current
-							if(!best) {
-								best = current;
-							}
+							// Set the new best
+							best = {
+								x: current.x,
+								y: current.y
+							};
 						}
 						else {
-							// We have hit something, make the best falsy and register collision
-							best = false;
-							collided.particle = true;
+							// We have hit a particle, fire the collision event and break out
+							this.fireEvent('collision', [particle, this.positions[current.x][current.y]]);
+							break;
 						}
 					}
 					else {
-						// We have hit a wall, make the best falsy and register collision
-						best = false;
-						collided.wall = true;
+						// We have hit the wall, fire the event and break out
+						this.fireEvent('wallCollision', [particle]);
+						break;
 					}
 				}
 				
-				// Fire collision events
-				if(collided.particle) {
-					this.fireEvent('collision', [particle, this.positions[current.x][current.y]]);
-				}
-				
-				if(collided.wall) {
-					this.fireEvent('wallCollision', [particle]);
-				}
-				
-				// If we have a best, move to it
+				// If there is a best, move to it
 				if(best) {
 					this.moveParticle(particle, best);
 				}

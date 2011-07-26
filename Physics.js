@@ -69,7 +69,8 @@ var Physics = {
 			}.bind(this);
 			
 			/**
-			 * Stops the step interval
+			 * Stops the interval that calls step
+			 * Fires the stop event. It will fire the notRunning event if it is not running yet
 			 * 
 			 * @return {Object} The instance of Physics.World to allow chaining
 			 */

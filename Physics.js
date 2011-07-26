@@ -74,11 +74,18 @@ var Physics = {
 			 * @return {Object} The instance of Physics.World to allow chaining
 			 */
 			this.stop = function() {
-				clearInterval(this.interval);
-				this.interval = false;
-				
-				// Fire the stop event
-				this.fireEvent('stop');
+				// Only do this if we have an interval
+				if(this.interval !== false) {
+					clearInterval(this.interval);
+					this.interval = false;
+					
+					// Fire the stop event
+					this.fireEvent('stop');
+				}
+				else {
+					// Not running, fire the notRunning event
+					this.fireEvent('notRunning');
+				}
 				
 				return this;
 			}.bind(this);

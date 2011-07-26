@@ -32,6 +32,23 @@ var Physics = {
 				}
 			}
 			
+			this.clear = function() {
+				// Initialise variables
+				var x = null,
+					y = null;
+				
+				// Wipe all the things!
+				this.particles = [];
+				this.positions = [];
+				
+				for(x = 0; x < this.options.width; x += 1) {
+					for(y = 0; y < this.options.height; y += 1) {
+						this.positions[x] = [];
+						this.positions[x][y] = false;
+					}
+				}
+			};
+			
 			this.start = function() {
 				if(this.interval === false) {
 					this.interval = setInterval(this.step, 1000 / this.options.fps);
@@ -134,16 +151,20 @@ var Physics = {
 						collided = this.positions[current.x][current.y];
 						
 						// Transfer our force onto the collided particle if it is not locked
-						if(!collided.options.locked) {
-							if(collided.options.position.x < best.x || collided.options.position.x > best.x) {
+						if(collided.options.position.x < best.x || collided.options.position.x > best.x) {
+							if(!collided.options.locked) {
 								collided.options.velocity.x += particle.options.velocity.x;
-								particle.options.velocity.x = 0;
 							}
 							
-							if(collided.options.position.y < best.y || collided.options.position.y > best.y) {
+							particle.options.velocity.x = 0;
+						}
+						
+						if(collided.options.position.y < best.y || collided.options.position.y > best.y) {
+							if(!collided.options.locked) {
 								collided.options.velocity.y += particle.options.velocity.y;
-								particle.options.velocity.y = 0;
 							}
+							
+							particle.options.velocity.y = 0;
 						}
 						
 						this.fireEvent('collision', [particle, collided]);

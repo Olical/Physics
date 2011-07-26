@@ -21,16 +21,7 @@ var Physics = {
 				this.setOptions(options);
 			}
 			
-			this.particles = [];
-			this.positions = [];
 			this.interval = false;
-			
-			for(x = 0; x < this.options.width; x += 1) {
-				for(y = 0; y < this.options.height; y += 1) {
-					this.positions[x] = [];
-					this.positions[x][y] = false;
-				}
-			}
 			
 			this.clear = function() {
 				// Initialise variables
@@ -258,6 +249,9 @@ var Physics = {
 				
 				return this;
 			}.bind(this);
+			
+			// Set everything up by calling clear
+			this.clear();
 			
 			// Start the loop
 			this.start();

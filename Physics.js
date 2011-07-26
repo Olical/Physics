@@ -7,9 +7,9 @@ var Physics = {
 	World: new Class({
 		Implements: [Events, Options],
 		options: {
-			fps: 16,
-			width: 500,
-			height: 500
+			fps: 16, // The amount of frames per second, runs fine even on 24
+			width: 500, // The width of the world in particles, not pixels
+			height: 500 // The height of the world in particles, not pixels
 		},
 		initialize: function(options) {
 			// Initialise variables

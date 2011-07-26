@@ -127,15 +127,15 @@ var Physics = {
 				// If there is a best, move to it
 				if(best) {
 					this.moveParticle(particle, best);
-				}
-				
-				// Fire events
-				if(events.particle) {
-					this.fireEvent('collision', [particle, this.positions[current.x][current.y]]);
-				}
-				
-				if(events.wall) {
-					this.fireEvent('wallCollision', [particle]);
+					
+					// Fire events
+					if(events.particle) {
+						this.fireEvent('collision', [particle, this.positions[current.x][current.y]]);
+					}
+					
+					if(events.wall) {
+						this.fireEvent('wallCollision', [particle]);
+					}
 				}
 				
 				return this;

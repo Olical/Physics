@@ -38,6 +38,8 @@ var Physics = {
 						this.positions[x][y] = false;
 					}
 				}
+				
+				return this;
 			};
 			
 			this.start = function() {

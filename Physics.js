@@ -1,7 +1,8 @@
 /**
  * @preserve Physics MooTools plugin v1.0.0
  * 
- * Oliver Caldwell 2011 (olivercaldwell.co.uk)
+ * Licenced under GPL v3 (see README.md)
+ * Copyright 2011 - Oliver Caldwell (olivercaldwell.co.uk)
  */
 var Physics = {
 	World: new Class({

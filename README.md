@@ -1,3 +1,30 @@
+# About
+
+This is a particle physics engine built in JavaScript using MooTools.
+
+It can handle thousands of particles at once, each with their own velocity and attributes.
+
+Because of the use of events, you can hook in at any point and use the engine as you see fit.
+
+It uses pixel perfect collision, so nothing will pop through anything else even if it is traveling faster than light.
+
+Heres a little feature list to sum things up.
+
+ * Handling of thousands of particles
+ * Configurable world size and FPS
+ * Implements velocity and friction based on weight
+ * Event based so you can hook into the functionality easily
+ * Uses [MooTools](http://mootools.net/) for a few methods, events and classes
+ * Particles pass on velocity as they hit each other, allowing shockwaves in explosions etc
+
+For documentation please check the source. I have included a jsDoc comment block for every method detailing the arguments and return values.
+
+You can also open up `test.html` and see whats going on there.
+
+# Author
+
+Written by [Oliver Caldwell](http://olivercaldwell.co.uk/).
+
 # Licence
 
 **GPL v3**

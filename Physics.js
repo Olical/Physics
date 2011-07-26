@@ -122,6 +122,8 @@ var Physics = {
 				if(particle.options.velocity[axis] > -0.01 && particle.options.velocity[axis] < 0.01) {
 					particle.options.velocity[axis] = 0;
 				}
+				
+				return this;
 			}.bind(this);
 			
 			/**

@@ -94,7 +94,8 @@ var Physics = {
 					},
 					current = {},
 					events = {},
-					best = null;
+					best = null,
+					collided = null;
 				
 				// Loop over steps
 				for(i = 1; i <= steps; i += 1) {
@@ -130,7 +131,22 @@ var Physics = {
 					
 					// Fire events
 					if(events.particle) {
-						this.fireEvent('collision', [particle, this.positions[current.x][current.y]]);
+						collided = this.positions[current.x][current.y];
+						
+						// Transfer our force onto the collided particle if it is not locked
+						if(!collided.options.locked) {
+							if(collided.options.position.x < best.x || collided.options.position.x > best.x) {
+								collided.options.velocity.x += particle.options.velocity.x;
+								particle.options.velocity.x = 0;
+							}
+							
+							if(collided.options.position.y < best.y || collided.options.position.y > best.y) {
+								collided.options.velocity.y += particle.options.velocity.y;
+								particle.options.velocity.y = 0;
+							}
+						}
+						
+						this.fireEvent('collision', [particle, collided]);
 					}
 					
 					if(events.wall) {

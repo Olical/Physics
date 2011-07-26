@@ -134,6 +134,15 @@ var Physics = {
 					}
 					
 					if(events.wall) {
+						// Because we hit a wall, we need to remove the velocity from the side we hit
+						if(best.x === 0 || best.x === this.options.width - 1) {
+							particle.options.velocity.x = 0;
+						}
+						
+						if(best.y === 0 || best.y === this.options.height - 1) {
+							particle.options.velocity.y = 0;
+						}
+						
 						this.fireEvent('wallCollision', [particle]);
 					}
 				}

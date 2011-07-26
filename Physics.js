@@ -23,6 +23,11 @@ var Physics = {
 			
 			this.interval = false;
 			
+			/**
+			 * Resets the particles and positions array
+			 * 
+			 * @return {Object} The instance of Physics.World to allow chaining
+			 */
 			this.clear = function() {
 				// Initialise variables
 				var x = null,
@@ -42,6 +47,12 @@ var Physics = {
 				return this;
 			};
 			
+			/**
+			 * Starts the timed loop that calls each step
+			 * Fires the start event when it starts and the alreadyRunning event if its, well, already running
+			 * 
+			 * @return {Object} The instance of Physics.World to allow chaining
+			 */
 			this.start = function() {
 				if(this.interval === false) {
 					this.interval = setInterval(this.step, 1000 / this.options.fps);
@@ -57,6 +68,11 @@ var Physics = {
 				return this;
 			}.bind(this);
 			
+			/**
+			 * Stops the step interval
+			 * 
+			 * @return {Object} The instance of Physics.World to allow chaining
+			 */
 			this.stop = function() {
 				clearInterval(this.interval);
 				this.interval = false;
@@ -67,6 +83,11 @@ var Physics = {
 				return this;
 			}.bind(this);
 			
+			/**
+			 * 
+			 * 
+			 * @return {Object} The instance of Physics.World to allow chaining
+			 */
 			this.moveParticle = function(particle, to) {
 				// Change the positions object value
 				this.positions[particle.options.position.x][particle.options.position.y] = false;
@@ -78,6 +99,11 @@ var Physics = {
 				return this;
 			}.bind(this);
 			
+			/**
+			 * 
+			 * 
+			 * @return {Object} The instance of Physics.World to allow chaining
+			 */
 			this.applyFriction = function(particle, axis) {
 				// Apply friction
 				if(particle.options.velocity[axis] !== 0) {
@@ -90,6 +116,11 @@ var Physics = {
 				}
 			}.bind(this);
 			
+			/**
+			 * 
+			 * 
+			 * @return {Object} The instance of Physics.World to allow chaining
+			 */
 			this.slideParticle = function(particle, to) {
 				// Iniailise variables
 				var from = particle.options.position,
@@ -180,6 +211,11 @@ var Physics = {
 				return this;
 			}.bind(this);
 			
+			/**
+			 * 
+			 * 
+			 * @return {Object} The instance of Physics.World to allow chaining
+			 */
 			this.step = function() {
 				// Loop over the particles
 				this.particles.each(function(particle) {
@@ -211,6 +247,11 @@ var Physics = {
 				return this;
 			}.bind(this);
 			
+			/**
+			 * 
+			 * 
+			 * @return {Object} The instance of Physics.World to allow chaining
+			 */
 			this.addParticle = function(particle, force) {
 				// Make sure the point is empty
 				if(!this.positions[particle.options.position.x][particle.options.position.y] || force) {
@@ -232,6 +273,11 @@ var Physics = {
 				return this;
 			}.bind(this);
 			
+			/**
+			 * 
+			 * 
+			 * @return {Object} The instance of Physics.World to allow chaining
+			 */
 			this.removeParticle = function(particle) {
 				// Get the index of the paticle in the particles array
 				var index = this.particles.indexOf(particle);

@@ -339,16 +339,16 @@ var Physics = {
 		Implements: [Options],
 		options: {
 			position: {
-				x: 0,
-				y: 0
+				x: 0, // The initial x position
+				y: 0 // The initial y position
 			},
 			velocity: {
-				x: 0,
-				y: 0
+				x: 0, // The initial velocity on the x axis
+				y: 0 // The initial velocity on the y axis
 			},
-			weight: 3,
-			gas: false,
-			locked: false
+			weight: 3, // The amount of force to apply downwards or upwards depending if the particle is a gas, also influences friction
+			gas: false, // Whether to apply weight upwards or not
+			locked: false // Whether the particle is like a wall, it can not be moved while locked but still can be collided with
 		},
 		initialize: function(options) {
 			// Set the options

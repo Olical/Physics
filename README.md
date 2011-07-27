@@ -8,6 +8,8 @@ Because of the use of events, you can hook in at any point and use the engine as
 
 It uses pixel perfect collision, so nothing will pop through anything else even if it is traveling faster than light.
 
+[Here is a demo on jsFiddle.](http://jsfiddle.net/Wolfy87/EqM6v/)
+
 Heres a little feature list to sum things up.
 
  * Handling of thousands of particles

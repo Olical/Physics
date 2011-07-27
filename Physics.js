@@ -349,6 +349,8 @@ var Physics = {
 			},
 			weight: 3, // The amount of force to apply downwards or upwards depending if the particle is a gas, also influences friction
 			gas: false, // Whether to apply weight upwards or not
+			liquid: false, // Whether or not the element should move side to side
+			liquidVelocity: 20, // The max velocity that can be applied side to side if the particle is a liquid
 			locked: false // Whether the particle is like a wall, it can not be moved while locked but still can be collided with
 		},
 		initialize: function(options) {

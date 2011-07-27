@@ -76,19 +76,33 @@
 				});
 				
 				canvas.addEvent('mousemove', function(e) {
+					// Initialise variables
+					var x = null,
+						y = null,
+						center = {
+							x: Math.floor(e.event.offsetX / 4),
+							y: Math.floor(e.event.offsetY / 4)
+						};
+					
 					// Draw new particles if drawing
 					if(drawing) {
-						world.addParticle(new Physics.Particle({
-							position: {
-								x: Math.floor(e.event.offsetX / 4),
-								y: Math.floor(e.event.offsetY / 4)
-							},
-							velocity: {
-								x: Number.random(-20, 20),
-								y: Number.random(-20, 20)
-							},
-							locked: e.shift
-						}));
+						for(x = center.x - 2; x < center.x + 2; x += 1) {
+							for(y = center.y - 2; y < center.y + 2; y += 1) {
+								if(x >= 0 && y >= 0 && x < world.options.width && y < world.options.height) {
+									world.addParticle(new Physics.Particle({
+										position: {
+											x: x,
+											y: y
+										},
+										velocity: {
+											x: Number.random(-20, 20),
+											y: Number.random(-20, 20)
+										},
+										locked: e.shift
+									}));
+								}
+							}
+						}
 					}
 				});
 		</script>

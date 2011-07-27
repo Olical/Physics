@@ -254,18 +254,6 @@ var Physics = {
 							particle.options.velocity.y -= particle.options.weight;
 						}
 						
-						// Apply side to side velocity to simulate a liquid
-						if(particle.options.liquid) {
-							yOffset = (particle.options.gas) ? -1 : 1;
-							
-							// We first check if there is something either above or below
-							// Depending on the particle being a gas or not
-							if(this.positions[particle.options.position.x] && this.positions[particle.options.position.x][particle.options.position.y + yOffset]) {
-								// Theres something there, so apply random x velocity
-								particle.options.velocity.x += Number.random(-particle.options.liquidVelocity, particle.options.liquidVelocity);
-							}
-						}
-						
 						// Apply friction
 						this.applyFriction(particle, 'x');
 						this.applyFriction(particle, 'y');
@@ -364,8 +352,6 @@ var Physics = {
 			},
 			weight: 3, // The amount of force to apply downwards or upwards depending if the particle is a gas, also influences friction
 			gas: false, // Whether to apply weight upwards or not
-			liquid: false, // Whether or not the element should move side to side
-			liquidVelocity: 50, // The max velocity that can be applied side to side if the particle is a liquid
 			locked: false // Whether the particle is like a wall, it can not be moved while locked but still can be collided with
 		},
 		initialize: function(options) {

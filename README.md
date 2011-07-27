@@ -14,13 +14,15 @@ Heres a little feature list to sum things up.
 
  * Handling of thousands of particles
  * Configurable world size and FPS
- * Implements velocity and friction based on weight
+ * Implements velocity and friction based on weight which coincidentally adds terminal velocity
  * Event based so you can hook into the functionality easily
  * Uses [MooTools](http://mootools.net/) for a few methods, events and classes
  * Particles pass on velocity as they hit each other
  * Particles lose all velocity on the appropriate axis when they hit a wall
 
-For documentation please check the source. I have included a jsDoc comment block for every method detailing the arguments and return values.
+For documentation please check the source. I have included a jsDoc comment block for every method detailing the arguments, return values and events.
+
+All events are emitted by the Physics.World class. Not each individual method.
 
 You can also open up `test.html` and see whats going on there.
 
